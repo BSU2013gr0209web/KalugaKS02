@@ -8,11 +8,10 @@
 Window::Window()
 {
     createClock();
-    createStopWatch();
-
+    createTools();
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(clockGroup);
-    layout->addWidget(stopWatchGroup);
+    layout->addWidget(toolsGroup);
     setLayout(layout);
 
     setWindowTitle(tr("Time Master"));
@@ -33,13 +32,17 @@ void Window::createClock()
     clockGroup->setLayout(clock);
 }
 
-void Window::createStopWatch()
+void Window::createTools()
 {
-    stopWatchGroup = new QGroupBox(tr("StopWatch"));
+    toolsGroup = new QGroupBox(tr("Tools"));
     StopWatch *swd = new StopWatch();
-    swd->setMinimumSize(400,120);
+    swd->setMaximumSize(600,300);
     swd->show();
-    QVBoxLayout *stopWatch = new QVBoxLayout;
-    stopWatch->addWidget(swd);
-    stopWatchGroup->setLayout(stopWatch);
+    StopWatch *swd1 = new StopWatch();
+    swd1->setMaximumSize(600,300);
+    swd1->show();
+    QVBoxLayout *tools = new QVBoxLayout;
+    tools->addWidget(swd);
+    tools->addWidget(swd1);
+    toolsGroup->setLayout(tools);
 }

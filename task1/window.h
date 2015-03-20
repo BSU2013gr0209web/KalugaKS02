@@ -21,17 +21,11 @@ public slots:
 
 private:
     void createClock();
-    void createStopWatch();
+    void createTools();
 
-    QDateTimeEdit *meetingEdit;
-    QDoubleSpinBox *doubleSpinBox;
-    QDoubleSpinBox *priceSpinBox;
-    QDoubleSpinBox *scaleSpinBox;
     QGroupBox *clockGroup;
-    QGroupBox *stopWatchGroup;
+    QGroupBox *toolsGroup;
     QLabel *meetingLabel;
-    QSpinBox *groupSeparatorSpinBox;
-    QDoubleSpinBox *groupSeparatorSpinBox_d;
 };
 
 #endif

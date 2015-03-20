@@ -23,6 +23,7 @@ protected:
 private:
     bool mRunning;
     QDateTime mStartTime;
+    QLCDNumber * mNumber;
     QLabel * mLabel;
     qint64 mTotalTime;
     qint64 mSessionTime;
