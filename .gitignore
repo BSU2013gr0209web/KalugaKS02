@@ -1,0 +1,9 @@
+
+*.exe
+*.obj
+*.user
+*.[oa]
+*[Dd]ebug*/
+*[Rr]elease*/
+bin/
+obj/

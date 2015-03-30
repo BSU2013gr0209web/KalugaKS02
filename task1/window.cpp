@@ -4,6 +4,7 @@
 #include "analogclock.h"
 #include "digitalclock.h"
 #include "stopwatch.h"
+#include "countdown.h"
 
 Window::Window()
 {
@@ -38,11 +39,11 @@ void Window::createTools()
     StopWatch *swd = new StopWatch();
     swd->setMaximumSize(600,300);
     swd->show();
-    StopWatch *swd1 = new StopWatch();
-    swd1->setMaximumSize(600,300);
-    swd1->show();
+    CountDown *cnt = new CountDown();
+    cnt->setMaximumSize(600,300);
+    cnt->show();
     QVBoxLayout *tools = new QVBoxLayout;
     tools->addWidget(swd);
-    tools->addWidget(swd1);
+    tools->addWidget(cnt);
     toolsGroup->setLayout(tools);
 }

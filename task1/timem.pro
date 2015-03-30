@@ -16,10 +16,12 @@ SOURCES += main.cpp \
     window.cpp \
     analogclock.cpp \
     digitalclock.cpp \
-    stopwatch.cpp
+    stopwatch.cpp \
+    countdown.cpp
 
 HEADERS  += \
     window.h \
     analogclock.h \
     digitalclock.h \
-    stopwatch.h
+    stopwatch.h \
+    countdown.h
