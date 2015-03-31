@@ -13,9 +13,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    analogclock.cpp \
-    window.cpp
+    window.cpp \
+    analogclock.cpp
 
 HEADERS  += \
-    analogclock.h \
-    window.h
+    window.h \
+    analogclock.h

@@ -4,28 +4,26 @@
 #include <QWidget>
 
 class QDateTimeEdit;
-class QSpinBox;
-class QDoubleSpinBox;
-class QGroupBox;
-class QLabel;
-class QLCDNumber;
+class QCalendarWidget;
+class QVBoxLayout;
 
 class Window : public QWidget
 {
     Q_OBJECT
 
 public:
-    Window();
+    Window(QWidget *parent = 0);
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 
-public slots:
+protected:
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    void createClock();
-    void createTools();
+    QVBoxLayout *clock;
+    QPoint dragPosition;
 
-    QGroupBox *clockGroup;
-    QGroupBox *toolsGroup;
 };
 
 #endif
-

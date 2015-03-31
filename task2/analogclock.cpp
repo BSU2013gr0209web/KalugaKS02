@@ -13,24 +13,26 @@ AnalogClock::AnalogClock(QWidget *parent)
 void AnalogClock::paintEvent(QPaintEvent *)
 {
     static const QPoint hourHand[3] = {
-        QPoint(7, 8),
-        QPoint(-7, 8),
+        QPoint(7, 9),
+        QPoint(-7, 9),
         QPoint(0, -50)
     };
     static const QPoint minuteHand[3] = {
-        QPoint(7, 8),
-        QPoint(-7, 8),
+        QPoint(7, 9),
+        QPoint(-7, 9),
         QPoint(0, -80)
     };
     static const QPoint secondHand[3] = {
-        QPoint(3,8),
-        QPoint(-3,8),
-        QPoint(0,-95)
+        QPoint(3,12),
+        QPoint(-3,12),
+        QPoint(0,-100)
     };
+    static const QPoint clockCover = QPoint(0,0);
 
     QColor hourColor(127, 0, 127, 191);
     QColor minuteColor(0, 127, 127, 191);
     QColor secondColor(0, 0, 127, 191);
+    QColor coverColor(0, 0, 127);
 
     int side = qMin(width(), height());
     QTime time = QTime::currentTime();
@@ -40,14 +42,18 @@ void AnalogClock::paintEvent(QPaintEvent *)
     painter.translate(width() / 2, height() / 2);
     painter.scale(side / 200.0, side / 200.0);
 
-    //second
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(secondColor);
-
-    painter.save();
-    painter.rotate(6.0 * (time.second() + time.msec() / 1000.0));
-    painter.drawConvexPolygon(secondHand, 3);
-    painter.restore();
+    //current date
+    QString date;
+    QDate d;
+    d = QDate::currentDate();
+    int day = d.dayOfWeek();
+    QString weekDay = QDate::shortDayName(day);
+    weekDay[0].isUpper();
+    date=QDate::currentDate().toString("dd.MM");
+    painter.setPen(coverColor);
+    painter.setFont(QFont("Arial", 10, QFont::Bold));
+    painter.drawText(-60, 5, weekDay);
+    painter.drawText(30, 5, date);
 
     //minute
     painter.setPen(Qt::NoPen);
@@ -82,6 +88,17 @@ void AnalogClock::paintEvent(QPaintEvent *)
         painter.rotate(30.0);
     }
 
+    //second
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(secondColor);
 
+    painter.save();
+    painter.rotate(6.0 * (time.second() + time.msec() / 1000.0));
+    painter.drawConvexPolygon(secondHand, 3);
+    painter.restore();
+
+    //cover
+    painter.setBrush(coverColor);
+    painter.drawEllipse(clockCover, 7, 7);
 
 }

@@ -3,32 +3,58 @@
 #include "window.h"
 #include "analogclock.h"
 
-Window::Window()
+Window::Window(QWidget *parent)
+    : QWidget(parent, Qt::FramelessWindowHint | Qt::WindowSystemMenuHint)
 {
-    createClock();
-    createTools();
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(clockGroup);
-    layout->addWidget(toolsGroup);
-    setLayout(layout);
-
-    setWindowTitle(tr("Time Master"));
-}
-
-void Window::createClock()
-{
-    clockGroup = new QGroupBox(tr("Clock"));
     AnalogClock *acl = new AnalogClock();
-    acl->setMinimumSize(400,400);
-    acl->show();
-    QVBoxLayout *clock = new QVBoxLayout;
+    acl->setMinimumSize(200, 200);
+    clock = new QVBoxLayout;
     clock->addWidget(acl);
-    clockGroup->setLayout(clock);
+    setLayout(clock);
+    //
+    QAction *quitAction = new QAction(tr("В&ыхад"), this);
+    quitAction->setShortcut(tr("Ctrl+Q"));
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    addAction(quitAction);
+    //
+    setContextMenuPolicy(Qt::ActionsContextMenu);
+    setToolTip(tr("Перацягівайце гадзіны левай кнопкай мышы.\n"
+                  "Выкарыстоўвайце правую кнопку мышы, каб адкрыць кантэкстнае меню."));
+    setWindowTitle(tr("Гадзіны"));
+    setWindowFlags(Qt::WindowStaysOnTopHint);
+    QRect desktopRect = QApplication::desktop()->availableGeometry(this);
+    QPoint center = desktopRect.topRight();
+
+    move(center.x()-250, center.y()+50);
 }
 
-void Window::createTools()
+void Window::mousePressEvent(QMouseEvent *event)
 {
-    toolsGroup = new QGroupBox(tr("Tools"));
-    QVBoxLayout *tools = new QVBoxLayout;
-    toolsGroup->setLayout(tools);
+    if (event->button() == Qt::LeftButton) {
+        dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
+    }
+}
+
+
+void Window::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - dragPosition);
+        event->accept();
+    }
+}
+
+
+void Window::resizeEvent(QResizeEvent * /* event */)
+{
+    int side = qMin(width(), height());
+    QRegion maskedRegion(width() / 2 - side / 2, height() / 2 - side / 2, side,
+                             side , QRegion::Ellipse);
+    setMask(maskedRegion);
+}
+
+QSize Window::sizeHint() const
+{
+    return QSize(100, 100);
 }

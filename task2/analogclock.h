@@ -2,6 +2,7 @@
 #define ANALOGCLOCK_H
 
 #include <QWidget>
+class QLabel;
 
 class AnalogClock : public QWidget
 {
@@ -12,6 +13,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+
 };
 
 #endif
