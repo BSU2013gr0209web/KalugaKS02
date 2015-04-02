@@ -13,7 +13,7 @@ class Window : public QWidget
 
 public:
     Window(QWidget *parent = 0);
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const Q_DECL_OVERRIDE;// калі збіраць пад новым стандартам, то там ужо ёсць паўключавое слова override
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;

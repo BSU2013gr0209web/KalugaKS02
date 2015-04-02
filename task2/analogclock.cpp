@@ -48,7 +48,7 @@ void AnalogClock::paintEvent(QPaintEvent *)
     d = QDate::currentDate();
     int day = d.dayOfWeek();
     QString weekDay = QDate::shortDayName(day);
-    weekDay[0].isUpper();
+    weekDay[0].isUpper();// чыстая функцыя якая вяртае рэзультат, але ён не выкарыстоўваецца
     date=QDate::currentDate().toString("dd.MM");
     painter.setPen(coverColor);
     painter.setFont(QFont("Arial", 10, QFont::Bold));
@@ -102,3 +102,5 @@ void AnalogClock::paintEvent(QPaintEvent *)
     painter.drawEllipse(clockCover, 7, 7);
 
 }
+
+// у астатнем усё вельмі добра!!!

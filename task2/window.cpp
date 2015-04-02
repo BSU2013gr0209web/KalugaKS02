@@ -18,10 +18,10 @@ Window::Window(QWidget *parent)
     addAction(quitAction);
     //
     setContextMenuPolicy(Qt::ActionsContextMenu);
-    setToolTip(tr("Перацягівайце гадзіны левай кнопкай мышы.\n"
+    setToolTip(tr("Перацягівайце гадзіннік левай кнопкай мышы.\n"
                   "Выкарыстоўвайце правую кнопку мышы, каб адкрыць кантэкстнае меню."));
     //
-    setWindowTitle(tr("Гадзіны"));
+    setWindowTitle(tr("Гадзіннік"));
     QRect desktopRect = QApplication::desktop()->availableGeometry(this);
     QPoint center = desktopRect.topRight();
     move(center.x()-250, center.y()+50);
